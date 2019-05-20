@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+/img
+.gitignore
+data.json
+init-project.sh
+README.md
