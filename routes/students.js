@@ -32,4 +32,17 @@ router.get('/:id', async(req, res) => {
     res.send(student);
 });
 
+router.delete('/:id', async(req, res) => {
+    const id = req.params.id;
+
+    if(isNaN(id * 0)) return res.status(400).send('Id must be number');
+
+    const student = await Students.findOneAndDelete( { id: parseInt(id) });
+    if (!student) return res.status(404).send('The student with the given ID was not found.');
+  
+    res.send(student);
+})
+
+module.exports = router; 
+
 module.exports = router;
