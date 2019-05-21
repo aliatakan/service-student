@@ -7,6 +7,7 @@ mongoose.connect('mongodb://localhost/mongo-exercise', { useNewUrlParser: true }
     .catch(err => console.log('Mongo connection is FAILED', err));
 
 const studentSchema = new mongoose.Schema({
+    id: Number,
     name: String,
     surname: String,
     courses: [String],
@@ -23,7 +24,12 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/:id', async(req, res) => {
-    res.send(req.params.id);
+    if(isNaN(req.params.id * 0)) return res.status(400).send('Id must be number');
+    
+    const student = await Students.findOne({ id: parseInt(req.params.id) });
+    if(!student) return res.status(404).send(`System could not find any student with id=${req.params.id}`);
+
+    res.send(student);
 });
 
 module.exports = router;
