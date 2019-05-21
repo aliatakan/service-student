@@ -24,9 +24,10 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/:id', async(req, res) => {
-    if(isNaN(req.params.id * 0)) return res.status(400).send('Id must be number');
+    const id = req.params.id;
+    if(isNaN(id * 0)) return res.status(400).send('Id must be number');
     
-    const student = await Students.findOne({ id: parseInt(req.params.id) });
+    const student = await Students.findOne({ id: parseInt(id) });
     if(!student) return res.status(404).send(`System could not find any student with id=${req.params.id}`);
 
     res.send(student);
@@ -34,7 +35,6 @@ router.get('/:id', async(req, res) => {
 
 router.delete('/:id', async(req, res) => {
     const id = req.params.id;
-
     if(isNaN(id * 0)) return res.status(400).send('Id must be number');
 
     const student = await Students.findOneAndDelete( { id: parseInt(id) });
@@ -44,5 +44,3 @@ router.delete('/:id', async(req, res) => {
 })
 
 module.exports = router; 
-
-module.exports = router;
