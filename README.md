@@ -47,3 +47,17 @@ curl -i localhost:3000
 You have 2 running containers. `service-student` and `mongodb`
 ![](images/docker-ps.png)
 
+### GET http://localhost:3000/api/students/
+Returns all the students
+```json
+{
+"id": "5ce1dc83485dce9027c27ad5"
+"name": "Tom"
+"surname": "Wood"
+},
+{
+"id": "5ce1dc83485dce9027c27ad6"
+"name": "Lary"
+"surname": "Thompson"
+}, ....
+```
