@@ -47,3 +47,23 @@ curl -i localhost:3000
 You have 2 running containers. `service-student` and `mongodb`
 ![](images/docker-ps.png)
 
+### GET http://localhost:3000/api/students/
+Returns all the students
+```json
+{
+"id": "5ce64832013682746b6eddcd"
+"name": "Tom"
+"surname": "Wood"
+},
+{
+"id": "5ce64832013682746b6ed37f"
+"name": "Lary"
+"surname": "Thompson"
+}, ....
+```
+
+### GET http://localhost:3000/api/students/`:id`
+Returns a student with the given Id
+
+### DELETE http://localhost:3000/api/students/`:id`
+Deletes a student with the given Id and Returns the deleted student back

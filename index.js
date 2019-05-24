@@ -1,16 +1,14 @@
-'use strict';
-
+const mongoose = require('mongoose');
+const students = require('./routes/students');
 const express = require('express');
-
-// Constants
-const PORT = 3000;
-const HOST = '0.0.0.0';
-
-// App
 const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello world\n');
-});
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+mongoose.connect('mongodb://localhost/mongo-exercise', { useNewUrlParser: true })
+    .then(() => console.log('Mongo connection is OK!'))
+    .catch(err => console.log('Mongo connection is FAILED', err));
+
+app.use(express.json());
+app.get('/', (req, res) => { res.send('Hello world\n') });
+app.use('/api/students', students);
+
+app.listen(3000, () => console.log('Server started!'));
