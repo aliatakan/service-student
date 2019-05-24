@@ -51,19 +51,41 @@ You have 2 running containers. `service-student` and `mongodb`
 Returns all the students
 ```json
 {
-"id": "5ce64832013682746b6eddcd"
-"name": "Tom"
-"surname": "Wood"
+    "id": "5ce64832013682746b6eddcd"
+    "name": "Tom"
+    "surname": "Wood"
 },
 {
-"id": "5ce64832013682746b6ed37f"
-"name": "Lary"
-"surname": "Thompson"
+    "id": "5ce64832013682746b6ed37f"
+    "name": "Lary"
+    "surname": "Thompson"
 }, ....
 ```
 
-### GET http://localhost:3000/api/students/`:id`
+### GET http://localhost:3000/api/students/:id
 Returns a student with the given Id
 
-### DELETE http://localhost:3000/api/students/`:id`
+### DELETE http://localhost:3000/api/students/:id
 Deletes a student with the given Id and Returns the deleted student back
+
+### POST http://localhost:3000/api/students
+Insert a student
+```json
+{
+	"name": "Ali",
+	"surname": "Atakan",
+	"age": 6,
+	"courses": ["course1","course2"]
+}
+```
+
+### PUT http://localhost:3000/api/students
+Update a student
+```json
+{
+	"name": "Ali",
+	"surname": "Atakan",
+	"age": 10,
+	"courses": ["kurs13"]
+}
+```
