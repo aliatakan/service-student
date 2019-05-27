@@ -11,7 +11,7 @@ require('./startup/prod')(app);
 app.use(express.json());
 app.use('/api/students', students);
 
-//app.get('/', (req, res) => { res.send('Hello world\n') });
-const server = app.listen(3000, () => console.log('Server started!'));
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
 
 module.exports = server;
