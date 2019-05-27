@@ -1,4 +1,5 @@
 const { Student, validate } = require('../models/student');
+const validateObjectId = require('../utilities/validateObjectId');
 const express = require('express');
 const router = express.Router();
 
@@ -7,18 +8,14 @@ router.get('/', async(req, res) => {
     res.send(students);
 });
 
-router.get('/:id', async(req, res) => {
-    if(!req.params.id.match(/^[0-9a-fA-F]{24}$/)) return res.status(400).send('Invalid ID');
-
+router.get('/:id', validateObjectId, async(req, res) => {
     const student = await Student.findById(req.params.id);
     if(!student) return res.status(404).send(`The student with the given ID was not found`);
 
     res.send(student);
 });
 
-router.delete('/:id', async(req, res) => {
-    if(!req.params.id.match(/^[0-9a-fA-F]{24}$/)) return res.status(400).send('Invalid ID');
-
+router.delete('/:id', validateObjectId, async(req, res) => {
     const student = await Student.findByIdAndRemove(req.params.id);
     if (!student) return res.status(404).send('The student with the given ID was not found.');
   
@@ -48,7 +45,7 @@ router.post('/', async(req, res) => {
     }
 })
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', validateObjectId, async(req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
 
