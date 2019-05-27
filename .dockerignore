@@ -1,7 +1,8 @@
 node_modules
 npm-debug.log
-/img
+img/
 .gitignore
 data.json
 init-project.sh
 README.md
+coverage/

@@ -5,14 +5,17 @@
   "author": "First Last <first.last@example.com>",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "jest --watchAll --verbose --coverage"
   },
   "dependencies": {
     "@hapi/joi": "^15.0.3",
+    "config": "^3.1.0",
     "express": "^4.17.0",
     "mongoose": "^5.5.10"
   },
   "devDependencies": {
-    "@types/joi": "^14.3.3"
+    "@types/joi": "^14.3.3",
+    "jest": "^24.8.0",
+    "supertest": "^4.0.2"
   }
 }

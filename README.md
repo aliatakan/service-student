@@ -13,7 +13,7 @@ Firstly, clone the repository into your pc.
 ```
 git clone https://github.com/aliatakan/service-student.git
 ```
-Then, enter inside the project folder, give execute permission to `script.sh`
+Then, enter inside the project folder, give execute permission to `./script.sh`
 
 ```
 chmod 755 script.sh
