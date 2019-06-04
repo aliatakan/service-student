@@ -11,7 +11,7 @@
   "jest": {
     "verbose": true,
     "transform": {
-      "\\.js$": "./node_modules/babel-jest"
+      "\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   },
   "engines": {
