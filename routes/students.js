@@ -49,7 +49,10 @@ router.put('/:id', validateObjectId, async(req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
 
-    e: req.body.surname,
+    const student = await Student.findByIdAndUpdate(req.params.id, 
+        { 
+            name: req.body.name, 
+            surname: req.body.surname,
             age: req.body.age,
             courses: req.body.courses
         }, 
