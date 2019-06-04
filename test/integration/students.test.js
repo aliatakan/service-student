@@ -6,13 +6,13 @@ let server;
 describe('/api/students', () => {
     beforeEach(() => { server = require('../../index'); });
 
-    afterEach(async () => {
+    afterEach(async() => {
         server.close();
         await Student.remove({});
     });
 
     describe('GET /', () => {
-        it('should return all students', async () => {
+        it('should return all students', async() => {
             Student.collection.insertMany([
                 { name: 'student1 name', surname: 'student1 surname', age: 10, courses: ['course1', 'course2'] },
                 { name: 'student2 name', surname: 'student2 surname', age: 10, courses: ['course1', 'course2'] },
@@ -27,18 +27,18 @@ describe('/api/students', () => {
     });
 
     describe('GET /:id', () => {
-        it('should return 404 if invalid id is passed', async () => {
+        it('should return 404 if invalid id is passed', async() => {
             const res = await request(server).get('/api/students/1');
             expect(res.status).toBe(404);
         });
 
-        it('should return 404 if no student with the given id exist', async () => {
+        it('should return 404 if no student with the given id exist', async() => {
             const id = mongoose.Types.ObjectId();
             const res = await request(server).get('/api/students/' + id);
             expect(res.status).toBe(404);
         });
 
-        it('should return the student with the given id', async () => {
+        it('should return the student with the given id', async() => {
             const student = new Student({ name: 'student1 name', surname: 'student1 surname', age: 10, courses: ['course1', 'course2'] })
             await student.save();
 
