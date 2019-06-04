@@ -53,7 +53,7 @@ router.put('/:id', validateObjectId, async(req, res) => {
         { 
             name: req.body.name, 
             surname: req.body.surname,
-            age: req.body.age,
+            age: req.body.age
             courses: req.body.courses
         }, 
         { new: true }
