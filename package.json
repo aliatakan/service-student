@@ -8,12 +8,6 @@
     "test": "jest --coverage",
     "start": "node index.js"
   },
-  "jest": {
-    "verbose": true,
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  },
   "engines": {
     "node": "v11.5.0"
   },
@@ -27,7 +21,10 @@
   },
   "devDependencies": {
     "@types/joi": "^14.3.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "jest": "^24.8.0",
+    "superagent": "^5.0.5",
     "supertest": "^4.0.2"
   }
 }
