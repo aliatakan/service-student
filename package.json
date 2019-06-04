@@ -5,11 +5,14 @@
   "author": "First Last <first.last@example.com>",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --coverage",
+    "test": "jest --coverage",
     "start": "node index.js"
   },
-  "transform": {
-    "\\.js$": "./node_modules/babel-jest"
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "\\.js$": "./node_modules/babel-jest"
+    }
   },
   "engines": {
     "node": "v11.5.0"
