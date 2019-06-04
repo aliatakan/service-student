@@ -19,5 +19,10 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('Npm publish') { 
+            steps {
+                sh 'npm publish' 
+            }
+        }
     }
 }
