@@ -22,7 +22,7 @@ pipeline {
         stage('Npm publish') { 
             steps {
                 sh '''
-                    registry=http://nexus.kubernetes.softbased.com/repository/npm-group/_auth=bnBtdXNlcjoxMjM0NTc=
+                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/_auth=bnBtdXNlcjoxMjM0NTc= | tee .npmrc
                     npm publish
                 '''
             }
