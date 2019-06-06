@@ -21,6 +21,8 @@ pipeline {
         }
         stage('Npm publish') { 
             steps {
+                sh 'echo email=any@email.com > .npmrc'
+                sleep 300
                 sh 'npm publish' 
             }
         }
