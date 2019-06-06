@@ -23,6 +23,7 @@ pipeline {
             steps {
                 sh '''
                     echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/_auth=bnBtdXNlcjoxMjM0NTc= | tee .npmrc
+                    sleep 120
                     npm publish
                 '''
             }
