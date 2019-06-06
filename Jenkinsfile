@@ -21,9 +21,10 @@ pipeline {
         }
         stage('Npm publish') { 
             steps {
-                sh 'echo email=any@email.com > .npmrc'
-                sleep 280
-                sh 'npm publish' 
+                sh '''
+                    registry=http://nexus.kubernetes.softbased.com/repository/npm-group/_auth=bnBtdXNlcjoxMjM0NTc=
+                    npm publish
+                '''
             }
         }
     }
