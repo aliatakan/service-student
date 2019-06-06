@@ -36,7 +36,7 @@ pipeline {
                 */
                 
                 sh '''
-                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .nmprc
+                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-private/ | tee .nmprc
                     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
                     npm publish
                 '''
