@@ -29,7 +29,7 @@ pipeline {
                         
                 sh "echo \"//npm.dev.btek/:always-auth=true\" >> ~/.npmrc"
                         
-                sh "npm set registry https://nexus.kubernetes.softbased.com/repository/npm-group/"
+                sh "npm set registry https://nexus.kubernetes.softbased.com/repository/npm-private/"
 
                 sh "npm publish"
                 
