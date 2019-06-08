@@ -27,6 +27,7 @@ pipeline {
         stage('Npm publish') { 
             steps {                
                 sh '''
+                    sleep 300
                     npm publish
                 '''
             }
