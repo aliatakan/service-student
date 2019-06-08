@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                     echo registry=http://service-nexus.nexus.svc.cluster.local/repository/npm-group/ | tee .npmrc
-                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
+                    echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
                     npm install
                 '''
                 //sh 'npm install' 
