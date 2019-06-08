@@ -12,7 +12,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                    echo registry=http://service-nexus.nexus.svc.cluster.local/repository/npm-group/ | tee .npmrc
+                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                     echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
                     npm install
                 '''
