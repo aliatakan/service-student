@@ -12,7 +12,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
+                    echo registry=http://service-nexus.nexus.svc.cluster.local/repository/npm-group/ | tee .npmrc
                     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
                     npm install
                 '''
@@ -27,7 +27,6 @@ pipeline {
         stage('Npm publish') { 
             steps {                
                 sh '''
-                    sleep 300
                     npm publish
                 '''
             }
