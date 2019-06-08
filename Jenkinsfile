@@ -11,7 +11,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install' 
+                sh '''
+                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .nmprc
+                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
+                    npm install
+                '''
+                //sh 'npm install' 
             }
         }
         stage('Test') {
@@ -22,8 +27,6 @@ pipeline {
         stage('Npm publish') { 
             steps {                
                 sh '''
-                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-private/ | tee .nmprc
-                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
                     npm publish
                 '''
             }
