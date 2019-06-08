@@ -12,7 +12,6 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
-                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
                     npm install
                 '''
                 //sh 'npm install' 
