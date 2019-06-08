@@ -14,7 +14,7 @@ pipeline {
                 //echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                 //echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
                 sh '''
-                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/_authToken=NpmToken.bnBtdXNlcjoxMjM0NTc | tee .npmrc
+                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/_authToken=NpmToken.bnBtdXNlcjoxMjM0NTc= | tee .npmrc
                     npm install
                 '''
                 //sh 'npm install' 
