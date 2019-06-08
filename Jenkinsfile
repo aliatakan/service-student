@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                     echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .nmprc
                     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
-                    npm install
+                    npm --registry http://nexus.kubernetes.softbased.com/repository/npm-group/ install
                 '''
                 //sh 'npm install' 
             }
