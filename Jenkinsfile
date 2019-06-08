@@ -12,6 +12,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh '''
+                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-private/ | tee .nmprc
                     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
                     npm install
                 '''
