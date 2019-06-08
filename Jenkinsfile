@@ -14,13 +14,10 @@ pipeline {
                 //echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                 //echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
                 sh '''
-                    cat <<EOF > .npmrc
-                        registry=http://nexus.kubernetes.softbased.com/repository/npm-group/
-                        _auth=bnBtdXNlcjoxMjM0NTc=
-                    EOF                
+                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
+                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
+                    npm install            
                 '''
-                sh 'npm install' 
-                sh 'sleep 300'
             }
         }
         stage('Test') {
