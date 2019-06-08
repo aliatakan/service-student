@@ -17,10 +17,10 @@ pipeline {
                     cat <<EOF > .npmrc
                         registry=http://nexus.kubernetes.softbased.com/repository/npm-group/
                         _auth=bnBtdXNlcjoxMjM0NTc=
-                    EOF    
-                    npm install
+                    EOF                
                 '''
-                //sh 'npm install' 
+                sh 'npm install' 
+                sh 'sleep 300'
             }
         }
         stage('Test') {
