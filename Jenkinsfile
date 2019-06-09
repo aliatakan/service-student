@@ -8,7 +8,7 @@ pipeline {
     environment { 
         def app_name = 'service-student'
         //def version_number = process.env['BUILD_NUMBER']
-        def version_number = ''
+        def version_number = '2.3.0'
     }
     options { buildDiscarder(logRotator(numToKeepStr: '3')) }
     stages {
@@ -44,7 +44,7 @@ pipeline {
                     
                 }*/
 
-                version_number = "2.3.0"
+                
 
                 script {                    
                     docker.withRegistry('https://nexus.kubernetes.softbased.com/repository/docker-private/', 'nexus') {
