@@ -5,19 +5,20 @@ pipeline {
             args '-p 3001:3000' 
         }
     }
-    environment {
-        CI = 'true' 
+    environment { 
+        def app_name = 'service-student'
+        def version_number = $BUILD_NUMBER
     }
+    options { buildDiscarder(logRotator(numToKeepStr: '3')) }
     stages {
         stage('Build') { 
             steps {
                 //echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                 //echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
                 sh '''
-                    echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
+                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
-                    npm install
-                    sleep 120        
+                    npm install                          
                 '''
             }
         }
@@ -31,6 +32,20 @@ pipeline {
                 sh '''
                     npm publish
                 '''
+            }
+        }
+        stage ('Docker Build and Push') {
+            steps {                
+                script {
+                    docker.withRegistry('https://nexus.kubernetes.softbased.com/repository/docker-private/', 'nexus') {
+                        docker.build("softbased/${app_name}:${version_number}").push()
+                    }
+                }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi softbased/${app_name}:${version_number}"
             }
         }
     }
