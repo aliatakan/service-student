@@ -38,7 +38,7 @@ pipeline {
         stage ('Docker Build and Push') {
             steps {    
                 script {
-                    sh "version_number = $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[\", ]//g')"
+                    version_number = sh "echo $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[\", ]//g')"
                     
                 }
 
