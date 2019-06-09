@@ -7,7 +7,7 @@ pipeline {
     }
     environment { 
         def app_name = 'service-student'
-        def version_number = $BUILD_NUMBER
+        def version_number = process.env['BUILD_NUMBER']
     }
     options { buildDiscarder(logRotator(numToKeepStr: '3')) }
     stages {
