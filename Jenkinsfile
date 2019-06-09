@@ -28,19 +28,18 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Npm publish') { 
+        /*stage('Npm publish') { 
             steps {                
                 sh '''
                     npm publish
                 '''
             }
-        }
+        }*/
         stage ('Docker Build and Push') {
             steps {    
                 script {
-                    version_number = sh '''
-                            $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')"
-                        '''
+                    version_number = sh "$(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[\", ]//g')"
+                    
                 }
 
                 script {                    
