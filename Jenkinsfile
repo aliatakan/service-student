@@ -37,12 +37,14 @@ pipeline {
         }*/
         stage ('Docker Build and Push') {
             steps {    
-                script {
+                /*script {
                     version_number = sh ''' 
                         $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
                     '''    
                     
-                }
+                }*/
+
+                version_number = "2.3.0"
 
                 script {                    
                     docker.withRegistry('https://nexus.kubernetes.softbased.com/repository/docker-private/', 'nexus') {
