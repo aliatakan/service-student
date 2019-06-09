@@ -36,10 +36,12 @@ pipeline {
             }
         }
         stage ('Docker Build and Push') {
-            steps {          
+            steps {    
                 script {
                     version_number = $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
+                }
 
+                script {                    
                     docker.withRegistry('https://nexus.kubernetes.softbased.com/repository/docker-private/', 'nexus') {
                         docker.build("softbased/${app_name}:${version_number}").push()
                     }
