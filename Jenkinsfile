@@ -8,7 +8,7 @@ pipeline {
     environment { 
         def app_name = 'service-student'
         //def version_number = process.env['BUILD_NUMBER']
-        def version_number = $(node -p "require('./package.json').version")
+        def version_number = ''
     }
     options { buildDiscarder(logRotator(numToKeepStr: '3')) }
     stages {
@@ -36,8 +36,10 @@ pipeline {
             }
         }
         stage ('Docker Build and Push') {
-            steps {                
+            steps {          
                 script {
+                    version_number = $(node -p "require('./package.json').version") 
+
                     docker.withRegistry('https://nexus.kubernetes.softbased.com/repository/docker-private/', 'nexus') {
                         docker.build("softbased/${app_name}:${version_number}").push()
                     }
