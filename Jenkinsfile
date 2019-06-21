@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:lts-alpine' 
+            args '-p 3001:3000' 
+        }
+    }
     environment { 
         def app_name = 'service-student'
         //def version_number = process.env['BUILD_NUMBER']
@@ -39,6 +44,10 @@ pipeline {
                     
                 }*/
                 
+                sh '''
+                    sleep 500
+                '''
+
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         docker.build("aliatakan/${app_name}:${version_number}").push()
