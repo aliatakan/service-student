@@ -6,6 +6,7 @@ pipeline {
         }
     }
     environment { 
+        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_USER_PASSWORD')
         def app_name = 'service-student'
         //def version_number = process.env['BUILD_NUMBER']
         def version_number = '2.3.0'
@@ -45,14 +46,17 @@ pipeline {
                 }*/
                 
                 sh '''
-                    sleep 500
+                    docker build -t aliatakan/${app_name}:${version_number} .
+                    docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
+                    docker push aliatakan/${app_name}:${version_number}
+               
                 '''
-
+/*
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         docker.build("aliatakan/${app_name}:${version_number}").push()
                     }
-                }
+                }*/
             }
         }
         stage('Remove Unused docker image') {
