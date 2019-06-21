@@ -10,43 +10,50 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh '''
-                    echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
-                    echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
-                    npm install                          
-                '''
+                sh 'echo Build'
+                // sh '''
+                //     echo registry=https://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
+                //     echo _auth=bnBtdXNlcjoxMjM0NTc= | tee -a .npmrc
+                //     npm install                          
+                // '''
             }
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'echo Test'
+                //sh 'npm test'
             }
         }
         stage('Npm publish') { 
-            steps {                
-                sh '''
-                    npm publish
-                '''
+            steps {  
+                sh 'echo publish'              
+                // sh '''
+                //     npm publish
+                // '''
             }
         }
         stage ('Docker Build and Push') {
-            steps {    
+            steps {   
+                sh 'echo Docker build Push' 
                 // script {
-                //     version_number = sh ''' 
-                //         $(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
-                //     '''    
+                //     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                //         docker.build("softbased/${APP_NAME}:${VERSION_NUMBER}").push()
+                //     }
                 // }
-                
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                        docker.build("softbased/${APP_NAME}:${VERSION_NUMBER}").push()
-                    }
-                }
             }
         }
         stage('Remove Unused docker image') {
             steps{
-                sh "docker rmi softbased/${APP_NAME}:${VERSION_NUMBER}"
+                sh 'echo Remove'
+                //sh "docker rmi softbased/${APP_NAME}:${VERSION_NUMBER}"
+            }
+        }
+        stage('Deploy to k8s') {
+            steps {
+                sh 'echo k8s'
+                // sh "sed -i \"s/app_version/${version_number}/\" k8s.yaml"
+                // sh "sed -i \"s/app_name/${app_name}/g\" k8s.yaml"
+                // sh "kubectl apply -f k8s.yaml -n production"                               
             }
         }
     }
