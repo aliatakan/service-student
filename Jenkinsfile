@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:lts-alpine' 
-            args '-p 3001:3000' 
-        }
-    }
+    agent any
     environment { 
         def app_name = 'service-student'
         //def version_number = process.env['BUILD_NUMBER']
