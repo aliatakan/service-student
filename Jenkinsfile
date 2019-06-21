@@ -14,6 +14,7 @@ pipeline {
     options { buildDiscarder(logRotator(numToKeepStr: '3')) }
     stages {
         stage('Build') { 
+            
             steps {
                 //echo registry=http://nexus.kubernetes.softbased.com/repository/npm-group/ | tee .npmrc
                 //echo _auth=bnBtdXNlcjoxMjM0NTc | tee -a .npmrc
@@ -46,6 +47,11 @@ pipeline {
                 }*/
                 
                 sh '''
+                    RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+                    && tar xzvf docker-17.04.0-ce.tgz \
+                    && mv docker/docker /usr/local/bin \
+                    && rm -r docker docker-17.04.0-ce.tgz
+                    
                     docker build -t aliatakan/${app_name}:${version_number} .
                     docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
                     docker push aliatakan/${app_name}:${version_number}
