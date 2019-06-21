@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    tools {nodejs "node"}
     environment { 
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_USER_PASSWORD')
         APP_NAME = 'service-student'
